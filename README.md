@@ -1,4 +1,4 @@
-# Blockchain APIs _for_ [![bitcore Logo](http://bitpay.github.io/bitcore/images/bitcore-logo-with-ball.svg)][bitcore]
+# Blockchain APIs for bitcore
 
 [![NPM Package](https://img.shields.io/npm/v/bitcore-explorers.svg?style=flat-square)](https://www.npmjs.org/package/bitcore-explorers)
 [![Build Status](https://img.shields.io/travis/bitpay/bitcore-explorers.svg?branch=master&style=flat-square)](https://travis-ci.org/bitpay/bitcore-explorers)
