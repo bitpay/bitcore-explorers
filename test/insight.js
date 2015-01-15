@@ -80,7 +80,7 @@ describe('Insight', function() {
 
   describe('broadcasting a transaction', function() {
     var insight = new Insight();
-    var tx = require('../../data/tx_creation.json')[0][7];
+    var tx = require('./data/tx_creation.json')[0][7];
     beforeEach(function() {
       insight.requestPost = sinon.stub();
       insight.requestPost.onFirstCall().callsArgWith(2, null, {statusCode: 200});
