@@ -80,30 +80,31 @@ describe('Insight', function() {
 
   describe('broadcasting a transaction', function() {
     var insight = new Insight();
-    var tx = require('./data/tx_creation.json')[0][7];
     beforeEach(function() {
       insight.requestPost = sinon.stub();
       insight.requestPost.onFirstCall().callsArgWith(2, null, {statusCode: 200});
     });
     it('accepts a raw transaction', function(callback) {
-      insight.broadcast(tx, callback);
+      insight.broadcast(rawTx, callback);
     });
     it('accepts a transaction model', function(callback) {
-      insight.broadcast(new Transaction(tx), callback);
+      insight.broadcast(new Transaction(rawTx), callback);
     });
     it('errors if server is not available', function(callback) {
       insight.requestPost.onFirstCall().callsArgWith(2, 'Unable to connect');
-      insight.broadcast(tx, function(error) {
+      insight.broadcast(rawTx, function(error) {
         expect(error).to.equal('Unable to connect');
         callback();
       });
     });
     it('errors if server returns errorcode', function(callback) {
       insight.requestPost.onFirstCall().callsArgWith(2, null, {statusCode: 400}, 'error');
-      insight.broadcast(tx, function(error) {
+      insight.broadcast(rawTx, function(error) {
         expect(error).to.equal('error');
         callback();
       });
     });
   });
 });
+
+var rawTx = '01000000015884e5db9de218238671572340b207ee85b628074e7e467096c267266baf77a4000000006a473044022013fa3089327b50263029265572ae1b022a91d10ac80eb4f32f291c914533670b02200d8a5ed5f62634a7e1a0dc9188a3cc460a986267ae4d58faf50c79105431327501210223078d2942df62c45621d209fab84ea9a7a23346201b7727b9b45a29c4e76f5effffffff0150690f00000000001976a9147821c0a3768aa9d1a37e16cf76002aef5373f1a888ac00000000';
