@@ -41,9 +41,8 @@
     "sinon": "^1.12.2"
   },
   "dependencies": {
-    "bitcore": "^0.9.0",
+    "bitcore": "^0.9.6",
     "browser-request": "^0.3.3",
-    "lodash": "^2.4.1",
     "request": "^2.51.0"
   }
 }
