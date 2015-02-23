@@ -29,15 +29,11 @@
   },
   "homepage": "https://github.com/bitpay/bitcore-explorers",
   "devDependencies": {
-    "assert": "^1.1.2",
     "bitcore-build": "git://github.com/bitpay/bitcore-build.git",
     "brfs": "^1.2.0",
     "browserify": "^8.1.1",
-    "chai": "^1.10.0",
-    "coveralls": "^2.11.2",
+    "chai": "^2.0.0",
     "gulp": "^3.8.10",
-    "istanbul": "^0.3.5",
-    "mocha": "^2.0.1",
     "sinon": "^1.12.2"
   },
   "dependencies": {
