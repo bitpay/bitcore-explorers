@@ -20,6 +20,7 @@ describe('AddressInfo', function() {
       addressInfo.balance.should.equal(552461906422);
       addressInfo.totalSent.should.equal(663303268631);
       addressInfo.totalReceived.should.equal(1215765175053);
+      addressInfo.unconfirmedBalance.should.equal(100000000000);
       addressInfo.transactionIds.length.should.equal(444);
     });
 
