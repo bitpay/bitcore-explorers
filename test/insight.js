@@ -9,6 +9,7 @@ var explorers = require('../');
 var Insight = explorers.Insight;
 var Address = bitcore.Address;
 var Transaction = bitcore.Transaction;
+var AddressInfo = explorers.models.AddressInfo;
 var Networks = bitcore.Networks;
 
 describe('Insight', function() {
@@ -88,7 +89,18 @@ describe('Insight', function() {
       insight.broadcast(rawTx, callback);
     });
     it('accepts a transaction model', function(callback) {
-      insight.broadcast(new Transaction(rawTx), callback);
+      var tx = new Transaction()
+        .from({
+          "txid": "e42447187db5a29d6db161661e4bc66d61c3e499690fe5ea47f87b79ca573986",
+          "vout": 1,
+          "address": "mgBCJAsvzgT2qNNeXsoECg2uPKrUsZ76up",
+          "scriptPubKey": "76a914073b7eae2823efa349e3b9155b8a735526463a0f88ac",
+          "amount": 0.01080000
+        })
+        .to("mn9new5vPYWuVN5m3gUBujfKh1uPQvR9mf", 500000)
+        .change("mw5ctwgEaNRbxkM4JhXH3rp5AyGvTWDZCD")
+        .sign("cSQUuwwJBAg6tYQhzqqLWW115D1s5KFZDyhCF2ffrnukZxMK6rNZ");
+      insight.broadcast(tx, callback);
     });
     it('errors if server is not available', function(callback) {
       insight.requestPost.onFirstCall().callsArgWith(2, 'Unable to connect');
@@ -101,6 +113,21 @@ describe('Insight', function() {
       insight.requestPost.onFirstCall().callsArgWith(2, null, {statusCode: 400}, 'error');
       insight.broadcast(rawTx, function(error) {
         expect(error).to.equal('error');
+        callback();
+      });
+    });
+  });
+
+  describe('get information about an address', function() {
+    var insight = new Insight();
+    var data = require('./models/sampleAddressFromInsight.json');
+    beforeEach(function() {
+      insight.requestGet = sinon.stub();
+      insight.requestGet.onFirstCall().callsArgWith(1, null, {statusCode: 200}, data);
+    });
+    it('makes the request as expected', function(callback) {
+      insight.address('mmvP3mTe53qxHdPqXEvdu8WdC7GfQ2vmx5', function(err, addressInfo) {
+        (addressInfo instanceof AddressInfo).should.equal(true);
         callback();
       });
     });
