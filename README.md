@@ -1,3 +1,4 @@
+<img src="http://bitcore.io/css/images/module-explorer.png" alt="bitcore explorers" height="35">
 # Blockchain APIs for bitcore
 
 [![NPM Package](https://img.shields.io/npm/v/bitcore-explorers.svg?style=flat-square)](https://www.npmjs.org/package/bitcore-explorers)
