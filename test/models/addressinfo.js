@@ -9,8 +9,13 @@ describe('AddressInfo', function() {
 
   describe('instantiation', function() {
 
-    var data = JSON.stringify(require('./sampleAddressFromInsight.json'));
+    var data = require('./sampleAddressFromInsight.json');
     var addressInfo = AddressInfo.fromInsight(data);
+
+
+    it('works with both strings and objects', function() {
+      AddressInfo.fromInsight(JSON.stringify(data)).should.deep.equal(addressInfo);
+    });
 
     it('parses correctly a sample response on Insight for address mmvP3mTe53qxHdPqXEvdu8WdC7GfQ2vmx5', function() {
       should.exist(addressInfo);
