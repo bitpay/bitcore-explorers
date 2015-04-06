@@ -141,7 +141,7 @@ describe('Insight', function() {
     var data = require('./models/sampleAddressFromInsight.json');
     beforeEach(function() {
       insight.requestGet = sinon.stub();
-      insight.requestGet.onFirstCall().callsArgWith(1, null, {statusCode: 200}, data);
+      insight.requestGet.onFirstCall().callsArgWith(1, null, {statusCode: 200}, JSON.stringify(data));
     });
     it('makes the request as expected', function(callback) {
       insight.address('mmvP3mTe53qxHdPqXEvdu8WdC7GfQ2vmx5', function(err, addressInfo) {
