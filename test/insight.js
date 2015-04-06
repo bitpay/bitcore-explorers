@@ -77,6 +77,24 @@ describe('Insight', function() {
         callback();
       });
     });
+    it('errors if server returns invalid data', function(callback) {
+      var invalidUtxo = {
+        address: '2MvQs7cJe49fbukkTLwhSYnV3hSXe6Bu8tb',
+        txid: '7d1eea0c7bed061a6ce1b49d57ef385621766e765bc3ed48bde04d816a4c3ea8',
+        vout: 1,
+        ts: 1428103500,
+        amount: 0.000198,
+        confirmations: 6,
+        confirmationsFromCache: true
+      };
+      insight.requestPost.onFirstCall().callsArgWith(2, null, {statusCode: 200}, [invalidUtxo]);
+      insight.getUnspentUtxos(address, function(error, unspent) {
+        expect(error).to.exist;
+        expect(error.name).to.equal('bitcore.ErrorInvalidArgument');
+        expect(error.toString()).to.contain('scriptPubKey');
+        callback();
+      });
+    });    
   });
 
   describe('broadcasting a transaction', function() {
