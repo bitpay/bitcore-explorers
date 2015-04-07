@@ -52,7 +52,9 @@ describe('Insight', function() {
     var address = '371mZyMp4t6uVtcEr4DAAbTZyby9Lvia72';
     beforeEach(function() {
       insight.requestPost = sinon.stub();
-      insight.requestPost.onFirstCall().callsArgWith(2, null, {statusCode: 200});
+      insight.requestPost.onFirstCall().callsArgWith(2, null, {
+        statusCode: 200
+      });
     });
     it('can receive an address', function(callback) {
       insight.getUnspentUtxos(new Address(address), callback);
@@ -71,9 +73,13 @@ describe('Insight', function() {
       });
     });
     it('errors if server returns errorcode', function(callback) {
-      insight.requestPost.onFirstCall().callsArgWith(2, null, {statusCode: 400});
+      insight.requestPost.onFirstCall().callsArgWith(2, null, {
+        statusCode: 400
+      });
       insight.getUnspentUtxos(address, function(error) {
-        expect(error).to.deep.equal({statusCode: 400});
+        expect(error).to.deep.equal({
+          statusCode: 400
+        });
         callback();
       });
     });
@@ -87,21 +93,25 @@ describe('Insight', function() {
         confirmations: 6,
         confirmationsFromCache: true
       };
-      insight.requestPost.onFirstCall().callsArgWith(2, null, {statusCode: 200}, [invalidUtxo]);
+      insight.requestPost.onFirstCall().callsArgWith(2, null, {
+        statusCode: 200
+      }, [invalidUtxo]);
       insight.getUnspentUtxos(address, function(error, unspent) {
         expect(error).to.exist;
         expect(error.name).to.equal('bitcore.ErrorInvalidArgument');
         expect(error.toString()).to.contain('scriptPubKey');
         callback();
       });
-    });    
+    });
   });
 
   describe('broadcasting a transaction', function() {
     var insight = new Insight();
     beforeEach(function() {
       insight.requestPost = sinon.stub();
-      insight.requestPost.onFirstCall().callsArgWith(2, null, {statusCode: 200});
+      insight.requestPost.onFirstCall().callsArgWith(2, null, {
+        statusCode: 200
+      });
     });
     it('accepts a raw transaction', function(callback) {
       insight.broadcast(rawTx, callback);
@@ -128,11 +138,21 @@ describe('Insight', function() {
       });
     });
     it('errors if server returns errorcode', function(callback) {
-      insight.requestPost.onFirstCall().callsArgWith(2, null, {statusCode: 400}, 'error');
+      insight.requestPost.onFirstCall().callsArgWith(2, null, {
+        statusCode: 400
+      }, 'error');
       insight.broadcast(rawTx, function(error) {
         expect(error).to.equal('error');
         callback();
       });
+    });
+  });
+  describe('requestPost', function() {
+    var insight = new Insight();
+    insight.request = sinon.stub();
+    insight.request.onFirstCall().callsArgWith(1);
+    it('works', function(cb) {
+      insight.requestPost('some/path', {}, cb);
     });
   });
 
@@ -141,7 +161,9 @@ describe('Insight', function() {
     var data = require('./models/sampleAddressFromInsight.json');
     beforeEach(function() {
       insight.requestGet = sinon.stub();
-      insight.requestGet.onFirstCall().callsArgWith(1, null, {statusCode: 200}, JSON.stringify(data));
+      insight.requestGet.onFirstCall().callsArgWith(1, null, {
+        statusCode: 200
+      }, JSON.stringify(data));
     });
     it('makes the request as expected', function(cb) {
       insight.address('mmvP3mTe53qxHdPqXEvdu8WdC7GfQ2vmx5', function(err, addressInfo) {
@@ -150,7 +172,9 @@ describe('Insight', function() {
       });
     });
     it('calls with error on parse error', function(cb) {
-      insight.requestGet.onFirstCall().callsArgWith(1, null, {statusCode: 200}, 'malformed json');
+      insight.requestGet.onFirstCall().callsArgWith(1, null, {
+        statusCode: 200
+      }, 'malformed json');
       insight.address('mmvP3mTe53qxHdPqXEvdu8WdC7GfQ2vmx5', function(err) {
         should.exist(err);
         err.toString().should.equal('SyntaxError: Unexpected token m');
