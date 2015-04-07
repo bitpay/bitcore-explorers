@@ -177,7 +177,7 @@ describe('Insight', function() {
       }, 'malformed json');
       insight.address('mmvP3mTe53qxHdPqXEvdu8WdC7GfQ2vmx5', function(err) {
         should.exist(err);
-        err.toString().should.equal('SyntaxError: Unexpected token m');
+        err.toString().should.contain('SyntaxError');
         cb();
       });
     });
