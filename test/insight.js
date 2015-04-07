@@ -143,10 +143,18 @@ describe('Insight', function() {
       insight.requestGet = sinon.stub();
       insight.requestGet.onFirstCall().callsArgWith(1, null, {statusCode: 200}, JSON.stringify(data));
     });
-    it('makes the request as expected', function(callback) {
+    it('makes the request as expected', function(cb) {
       insight.address('mmvP3mTe53qxHdPqXEvdu8WdC7GfQ2vmx5', function(err, addressInfo) {
         (addressInfo instanceof AddressInfo).should.equal(true);
-        callback();
+        cb();
+      });
+    });
+    it('calls with error on parse error', function(cb) {
+      insight.requestGet.onFirstCall().callsArgWith(1, null, {statusCode: 200}, 'malformed json');
+      insight.address('mmvP3mTe53qxHdPqXEvdu8WdC7GfQ2vmx5', function(err) {
+        should.exist(err);
+        err.toString().should.equal('SyntaxError: Unexpected token m');
+        cb();
       });
     });
   });
