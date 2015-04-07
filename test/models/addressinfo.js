@@ -1,10 +1,7 @@
 'use strict';
 
-var sinon = require('sinon');
 var should = require('chai').should();
-var expect = require('chai').expect;
 
-var bitcore = require('bitcore');
 var explorers = require('../../');
 var AddressInfo = explorers.models.AddressInfo;
 
@@ -15,7 +12,13 @@ describe('AddressInfo', function() {
     var data = require('./sampleAddressFromInsight.json');
     var addressInfo = AddressInfo.fromInsight(data);
 
+
+    it('works with both strings and objects', function() {
+      AddressInfo.fromInsight(JSON.stringify(data)).should.deep.equal(addressInfo);
+    });
+
     it('parses correctly a sample response on Insight for address mmvP3mTe53qxHdPqXEvdu8WdC7GfQ2vmx5', function() {
+      should.exist(addressInfo);
       addressInfo.address.toString().should.equal('mmvP3mTe53qxHdPqXEvdu8WdC7GfQ2vmx5');
       addressInfo.balance.should.equal(552461906422);
       addressInfo.totalSent.should.equal(663303268631);
