@@ -37,7 +37,7 @@
     "sinon": "^1.12.2"
   },
   "dependencies": {
-    "bitcore": "^0.11.4",
+    "bitcore": "^0.12.0",
     "browser-request": "^0.3.3",
     "request": "^2.51.0"
   }
