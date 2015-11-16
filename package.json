@@ -1,7 +1,7 @@
 {
   "name": "bitcore-explorers",
   "version": "1.0.1",
-  "description": "ECIES implemented for Bitcore.",
+  "description": "Module to query blockchain apis for Bitcore.",
   "main": "index.js",
   "directories": {
     "test": "test"
