@@ -57,17 +57,17 @@ describe('Insight', function() {
       });
     });
     it('can receive an address', function(callback) {
-      insight.getUnspentUtxos(new Address(address), callback);
+      insight.getUtxos(new Address(address), callback);
     });
     it('can receive a address as a string', function(callback) {
-      insight.getUnspentUtxos(address, callback);
+      insight.getUtxos(address, callback);
     });
     it('can receive an array of addresses', function(callback) {
-      insight.getUnspentUtxos([address, new Address(address)], callback);
+      insight.getUtxos([address, new Address(address)], callback);
     });
     it('errors if server is not available', function(callback) {
       insight.requestPost.onFirstCall().callsArgWith(2, 'Unable to connect');
-      insight.getUnspentUtxos(address, function(error) {
+      insight.getUtxos(address, function(error) {
         expect(error).to.equal('Unable to connect');
         callback();
       });
@@ -76,7 +76,7 @@ describe('Insight', function() {
       insight.requestPost.onFirstCall().callsArgWith(2, null, {
         statusCode: 400
       });
-      insight.getUnspentUtxos(address, function(error) {
+      insight.getUtxos(address, function(error) {
         expect(error).to.deep.equal({
           statusCode: 400
         });
@@ -96,7 +96,7 @@ describe('Insight', function() {
       insight.requestPost.onFirstCall().callsArgWith(2, null, {
         statusCode: 200
       }, [invalidUtxo]);
-      insight.getUnspentUtxos(address, function(error, unspent) {
+      insight.getUtxos(address, function(error, unspent) {
         expect(error).to.exist;
         expect(error.name).to.equal('bitcore.ErrorInvalidArgument');
         expect(error.toString()).to.contain('scriptPubKey');

@@ -22,7 +22,7 @@ At the moment, only Insight is supported, and only getting the UTXOs for an addr
 var explorers = require('bitcore-explorers');
 var insight = new explorers.Insight();
 
-insight.getUnspentUtxos('1Bitcoin...', function(err, utxos) {
+insight.getUtxos('1Bitcoin...', function(err, utxos) {
   if (err) {
     // Handle errors...
   } else {
