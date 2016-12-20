@@ -1,18 +1,22 @@
-<img src="http://bitcore.io/css/images/module-explorer.png" alt="bitcore explorers" height="35">
-# Blockchain APIs for bitcore
+# Bitcore Explorers
 
 [![NPM Package](https://img.shields.io/npm/v/bitcore-explorers.svg?style=flat-square)](https://www.npmjs.org/package/bitcore-explorers)
 [![Build Status](https://img.shields.io/travis/bitpay/bitcore-explorers.svg?branch=master&style=flat-square)](https://travis-ci.org/bitpay/bitcore-explorers)
 [![Coverage Status](https://img.shields.io/coveralls/bitpay/bitcore-explorers.svg?style=flat-square)](https://coveralls.io/r/bitpay/bitcore-explorers)
 
-A module for [bitcore](https://github.com/bitpay/bitcore) that implements HTTP requests to different Web APIs to query the state of the blockchain.
+This module is primarily for client-side applications interacting with the Insight API. It is a module for [bitcore](https://github.com/bitpay/bitcore) that implements HTTP requests to query the state of the blockchain.
 
 ## Getting started
 
 Be careful! When using this module, the information retrieved from remote servers may be compromised and not reflect the actual state of the blockchain.
 
 ```sh
+npm install bitcore-lib
 npm install bitcore-explorers
+```
+
+```sh
+bower install bitcore-lib
 bower install bitcore-explorers
 ```
 
