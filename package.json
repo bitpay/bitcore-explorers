@@ -41,6 +41,6 @@
     "request": "^2.51.0"
   },
   "peerDependencies": {
-    "bitcore-lib": "^0.13.14",
+    "bitcore-lib": "^0.13.14"
   }
 }
