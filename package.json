@@ -37,7 +37,7 @@
     "sinon": "^1.12.2"
   },
   "dependencies": {
-    "bitcore-lib": "^0.13.14",
+    "zcash-zcash-bitcore-lib": "^0.13.20-rc3"
     "browser-request": "^0.3.3",
     "request": "^2.51.0"
   }
